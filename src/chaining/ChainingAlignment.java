@@ -1,5 +1,7 @@
 package chaining;
 
+import java.util.Map;
+
 
 /**
  * Chainingアルゴリズムの実装クラスです。
@@ -11,6 +13,10 @@ public class ChainingAlignment {
 
 	// TODO RedBlackTreeをライブラリの継承で作りたいと思っています
 	RedBlackMultiTree<Integer, Alignment> fragments;
+	
+	// これ違うんじゃないか
+//	(A.sx, A), (A.ex, A)の形で格納する。第一変数でソートする。なのだから
+	
 	
 	/*
 	 * 文字列Pの開始位置sxから終了位置ex-1(sx < ex)まで連続した部分文字列を
@@ -43,8 +49,10 @@ public class ChainingAlignment {
 	// -> Alignmentクラス
 	
 	
-	private InitializeObject(){
-		
+	Map<Integer, Alignment> chain;
+	
+	private void InitializeObject(){
+		this.chain = new RedBlackMultiTree<Integer, Alignment>();
 	}
 	
 	

@@ -32,6 +32,15 @@ public class Alignment implements Comparable<Alignment>{
 	public int ey;
 	public double score;
 	
+	
+	/**
+	 * null constructer
+	 * 他に充実したコンストラクタを設けること
+	 */
+	Alignment(){
+		
+	}
+	
 	@Override
 	public int compareTo(Alignment o) {
 		// TODO 自動生成されたメソッド・スタブ
