@@ -10,7 +10,7 @@ package chaining;
 public class ChainingAlignment {
 
 	// TODO RedBlackTreeをライブラリの継承で作りたいと思っています
-	RedBlackMultiTree<Integer, String> fragments;
+	RedBlackMultiTree<Integer, Alignment> fragments;
 	
 	/*
 	 * 文字列Pの開始位置sxから終了位置ex-1(sx < ex)まで連続した部分文字列を
@@ -34,13 +34,13 @@ public class ChainingAlignment {
 	ChainingAlignment(String p, String q){
 		this.seqP = p;
 		this.seqQ = q;
-		this.fragments = new RedBlackMultiTree<Integer, String>();// この型でいいかは微妙
+		this.fragments = new RedBlackMultiTree<Integer, Alignment>();// この型でいいかは微妙
 		
 	}
 	
 	// アラインメントを扱うクラスを定義したい。
 	// そのクラスはComparatorを継承していたほうがよい。
-	
+	// -> Alignmentクラス
 	
 	
 	
