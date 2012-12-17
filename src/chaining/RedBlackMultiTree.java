@@ -14,7 +14,7 @@ import java.util.Map.Entry;
  * @see Collection
  * @see Comparator
  */
-public class RedBlackMultiTree<K,V> {
+public class RedBlackMultiTree<K,V> extends TreeMap<K, V>{
 	// AbstractMapを継承できないかもしれない、その時はこれもダメになる
 	// 先頭はnull;
 	// ほとんどTreeMapの真似
@@ -41,6 +41,9 @@ public class RedBlackMultiTree<K,V> {
 //	削除、このくらいか
 	
 //	極力無駄なものは省いて軽量に実装しよう
+//	継承したので下はいらなくなったが
+//	まだ継承可能であるかどうかはっきりしないので
+//	のこしておくこと
 	
 	/**
 	 * The comparator used to maintain order in this tree map, or

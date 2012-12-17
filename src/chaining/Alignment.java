@@ -47,7 +47,9 @@ public class Alignment implements Comparable<Alignment>{
 	
 	
 	/**
-	 * まだ実装していません。必要かどうかも謎。RedBlackTreeの実装しだい。
+	 * まだ実装していません。とりあえずこれでいい。
+	 * 必要かどうか謎。RedBlackTreeの実装しだい。
+	 * 
 	 * 
 	 * @author takashi
 	 *

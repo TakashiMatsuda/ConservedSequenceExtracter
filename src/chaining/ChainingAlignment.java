@@ -43,6 +43,11 @@ public class ChainingAlignment {
 	// -> Alignmentクラス
 	
 	
+	private InitializeObject(){
+		
+	}
+	
+	
 	
 	
 	
