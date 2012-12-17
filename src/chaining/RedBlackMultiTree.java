@@ -91,7 +91,8 @@ public class RedBlackMultiTree<K,V> {
 	
 	
 	/**
-	 * 直うち。変更が必要。
+	 * 直うち。MultiKey対応にどう変更するか。
+	 * 
 	 * 
 	 * @param key
 	 * @return
@@ -101,5 +102,12 @@ public class RedBlackMultiTree<K,V> {
 		return  (p==null ? null : p.value);
 	}
 	
+	/**
+	 * Balancing operations.
+	 */
+	
+	private static <K, V> boolean colorOf(Entry<K, V> p) {
+		return (p == null? BLACK : p.color);
+	}
 	
 }
