@@ -15,6 +15,7 @@ import java.util.Map.Entry;
  * @see Comparator
  */
 public class RedBlackMultiTree<K,V> {
+	// AbstractMapを継承できないかもしれない、その時はこれもダメになる
 	// 先頭はnull;
 	// ほとんどTreeMapの真似
 	
