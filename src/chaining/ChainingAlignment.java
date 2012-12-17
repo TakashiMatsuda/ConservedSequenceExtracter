@@ -38,6 +38,8 @@ public class ChainingAlignment {
 		
 	}
 	
+	// アラインメントを扱うクラスを定義したい。
+	// そのクラスはComparatorを継承していたほうがよい。
 	
 	
 	
