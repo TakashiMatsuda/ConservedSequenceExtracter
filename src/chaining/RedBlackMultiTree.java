@@ -1,6 +1,7 @@
 package chaining;
 
 import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * 赤黒木の実装
@@ -48,6 +49,8 @@ public class RedBlackMultiTree<K,V> {
 	 */
 	private final Comparator<? super K> comparator;
 	
+	private transient Entry<K, V> root = null;
+	
 	/**
 	 * The number of entries in the tree
 	 */
@@ -76,4 +79,27 @@ public class RedBlackMultiTree<K,V> {
 	}
 	
 	// その他ライブラリコードだと様々なコンストラクタが定義されているが、必要ないので割愛
+	
+	/**
+	 * Retuens the number of key-value mappings in this map.
+	 * 
+	 * @return the number of key value mappings in this map
+	 */
+	public int size(){
+		return size;
+	}
+	
+	
+	/**
+	 * 直うち。変更が必要。
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public V getM(Object key){
+		Entry<K, V> p = getEntry(key);
+		return  (p==null ? null : p.value);
+	}
+	
+	
 }
