@@ -1,6 +1,9 @@
 package chaining;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 
 /**
@@ -12,7 +15,7 @@ import java.util.Map;
 public class ChainingAlignment {
 
 	// TODO RedBlackTreeをライブラリの継承で作りたいと思っています
-	RedBlackMultiTree<Integer, Alignment> fragments;
+//	RedBlackMultiTree<Integer, Alignment> fragments;
 	
 	// これ違うんじゃないか
 //	(A.sx, A), (A.ex, A)の形で格納する。第一変数でソートする。なのだから
@@ -32,6 +35,25 @@ public class ChainingAlignment {
 	String seqP;
 	String seqQ;
 	
+
+	/*
+	 * fragments: アラインメントのリスト
+	 * chain: 候補鎖
+	 * 
+	 * パフォーマンスがよくないので、このコードに適した
+	 * カスタムド赤黒木を独自に実装するのがテスト通過後の目標。
+	 * 
+	 * 木の深さのメソッドがあるかどうか不安。なかったら自分で継承しなければいけない。
+	 * 
+	 * fragmentsは木である必要性はなく、単なるリストなのだが、
+	 * SortedMapのライブラリを利用した方が実装が楽なので、そうする。
+	 * 
+	 */
+	Map<Integer, Set<Alignment>> fragments;
+	Map<Integer, Set<Alignment>> chain;
+	
+	
+	
 	/**
 	 * 2つのsequenceと共にこのクラスのオブジェクトインスタンスとオブジェクト参照を生成します。
 	 * @param p
@@ -40,20 +62,25 @@ public class ChainingAlignment {
 	ChainingAlignment(String p, String q){
 		this.seqP = p;
 		this.seqQ = q;
-		this.fragments = new RedBlackMultiTree<Integer, Alignment>();// この型でいいかは微妙
+		this.fragments = new TreeMap<Integer, Set<Alignment>>();
+		this.chain = new TreeMap<Integer, Set<Alignment>>();
+		
+//		各アラインメントに各鎖？
+	}
+	
+	
+//	Map<Integer, Alignment> chain;
+	
+	/*
+	 * アラインメントを行う。
+	 *	
+	 */
+	
+	private List<Alignment> localAlignment(String x, String y){
+		return null;
 		
 	}
 	
-	// アラインメントを扱うクラスを定義したい。
-	// そのクラスはComparatorを継承していたほうがよい。
-	// -> Alignmentクラス
-	
-	
-	Map<Integer, Alignment> chain;
-	
-	private void InitializeObject(){
-		this.chain = new RedBlackMultiTree<Integer, Alignment>();
-	}
 	
 	
 	
