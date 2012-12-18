@@ -1,5 +1,7 @@
 package chaining;
 
+import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -71,21 +73,61 @@ public class ChainingAlignment {
 	
 //	Map<Integer, Alignment> chain;
 	
-	/*
+	/**
 	 * アラインメントを行う。
-	 *	
+	 * @param x
+	 * @param y
+	 * @return ローカルアラインメントのリスト
 	 */
-	
 	private List<Alignment> localAlignment(String x, String y){
+//		ArrayかLinkedか
+//		Arrayだ
+//		下流での使い方をそのように最適化した。
 		return null;
-		
 	}
 	
+	/**
+	 * fragmentsを初期化します。
+	 */
+	private void InitializeFragments(){
+		List<Alignment> chips = localAlignment(this.seqP, this.seqQ);
+		HashSet<Alignment> tmpS = new HashSet<Alignment>();
+		for(Alignment k:chips){
+			// 超重い
+//			やっぱり継承してそれ専用のものを作ったほうがよい。いくら何でも複雑すぎて遅すぎる。
+			int exk = k.ex;
+			int sxk = k.sx;
+			// Mapへの挿入はkeyとvalueのセットでおこなわなければならず、複雑になる。
+			if (fragments.containsKey(sxk)){
+				fragments.get(sxk).add(k);
+			}
+			else{
+				tmpS.clear();// 危険、動作確認が絶対に必要
+				tmpS.add(k);
+				fragments.put(sxk, tmpS);// 安全性、putの動作でtmpSをどうあつかっているのか
+			}
+			if (fragments.containsKey(exk)){
+				fragments.get(exk).add(k);	
+			}
+			else{				
+//				fragments.put(exk, HashSet<Alignment>().add(k));// ここの書き方が難しい
+//				妥協すれば次のようにかけるが
+				tmpS.clear();// 危険、動作確認が絶対に必要
+				tmpS.add(k);
+				fragments.put(exk, tmpS);// 安全性、putの動作でtmpSをどうあつかっているのか
+			}
+		}
+	}
 	
-	
-	
-	
-	
+	/**
+	 * あまり綺麗ではないなー。
+	 * グローバル変数定義なのでメモリを食う。
+	 * 今回は別に問題ないが、汚いし余裕あったら変えたい。
+	 * 
+	 */
+	private void makeChain(){
+		
+	}
 	
 	
 }
