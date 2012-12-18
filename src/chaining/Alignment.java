@@ -14,12 +14,6 @@ import java.util.Comparator;
 public class Alignment implements Comparable<Alignment>{
 	
 	// どうしてcomparatorとserializableは表裏一体なのか。質問しよう。
-	
-//	まとなってはgitのレポジトリをworkspace直下に持ってきても問題なかったなあ。
-	
-//	comparatorはクラスそのものに入れるものではなかった！！！！！
-//  内部クラスとして定義するのもスマートかと
-//	代わりと言ってはなんだが、comparableを使ってみよう
 	/*
 	 * sx, ex, sy, ey, scoreの実装です
 	 */
