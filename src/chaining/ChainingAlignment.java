@@ -124,8 +124,10 @@ public class ChainingAlignment {
 	 * グローバル変数定義なのでメモリを食う。
 	 * 今回は別に問題ないが、汚いし余裕あったら変えたい。
 	 * 
+	 * 違うクラスを作って行う
 	 */
 	private void makeChain(){
+		
 		
 	}
 	
