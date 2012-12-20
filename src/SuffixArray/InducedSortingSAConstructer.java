@@ -51,7 +51,19 @@ public class InducedSortingSAConstructer {
 	 * @return
 	 */
 	private static byte[] checkSL(String library){
+		// TODO checkSLの実装
 		byte[] indicator = new byte[library.length()];
+		
+//		右となりと確認してその大小でSLtypeをつける
+		
+//		イテレータを使いたい
+		for(int i = 0; i < library.length(); i++){
+			if (library.codePointAt(i) < library.codePointAt(i+1)){
+				indicator[i] = 1;
+			}
+			else
+				indicator[i] = 0;
+		}
 		
 		
 		return indicator;
@@ -66,6 +78,7 @@ public class InducedSortingSAConstructer {
 	 * @return
 	 */
 	private static int[] sortLMSSuffixes(byte[] slindicator, String library){
+		// TODO sortLMEの実装
 		int[] sa = new int[library.length()];
 		
 		
@@ -81,6 +94,7 @@ public class InducedSortingSAConstructer {
 	 * @return
 	 */
 	private static int[] sortLSuffixes(byte[] slindicator, int[] sa, String library){
+		// TODO sortLSuffixesの実装
 		int[] updsa = sa;
 		
 		
@@ -96,6 +110,7 @@ public class InducedSortingSAConstructer {
 	 * @return
 	 */
 	private static int[] sortSSufixes(byte[] slindicator, int[] sa, String library){
+		// TODO sortSSuffixesの実装
 		int[] updsa = sa;
 		
 		
