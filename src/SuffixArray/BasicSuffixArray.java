@@ -19,7 +19,8 @@ public class BasicSuffixArray implements AbstractSuffixArray {
 	/**
 	 * 具体的なarrayの構築方法は別クラスで定義される
 	 */
-	public BasicSuffixArray(String a) {
+	public BasicSuffixArray(int[] sa, String a) {
+		this.array = sa;
 		this.library = a;
 		this.len = library.length();
 	}
