@@ -15,5 +15,6 @@ public interface AbstractSuffixArray {
 	 * オーナー文字列と、その接尾辞配列を格納するのがいい
 	 * 
 	 */
+	public int[] basicsearch(String key);
 	
 }
