@@ -51,7 +51,7 @@ public class InducedSortingSAConstructer {
 	 * @return
 	 */
 	private static byte[] checkSL(String library){
-		// TODO checkSLの実装
+		
 		byte[] indicator = new byte[library.length()];
 		
 //		右となりと確認してその大小でSLtypeをつける
@@ -65,8 +65,8 @@ public class InducedSortingSAConstructer {
 				indicator[i] = 0;
 		}
 		
-		
 		return indicator;
+		
 	}
 	
 	
@@ -75,14 +75,18 @@ public class InducedSortingSAConstructer {
 	 * 
 	 * @param slindicator
 	 * @param library
-	 * @return
+	 * @return presuffixarray with LMS-types' score.
 	 */
 	private static int[] sortLMSSuffixes(byte[] slindicator, String library){
+		
 		// TODO sortLMEの実装
+		
 		int[] sa = new int[library.length()];
 		
 		
+		
 		return sa;
+		
 	}
 	
 	
@@ -91,7 +95,7 @@ public class InducedSortingSAConstructer {
 	 * @param slindicator
 	 * @param sa
 	 * @param library
-	 * @return
+	 * @return updated suffixarray with L-types' score.
 	 */
 	private static int[] sortLSuffixes(byte[] slindicator, int[] sa, String library){
 		// TODO sortLSuffixesの実装
@@ -107,7 +111,7 @@ public class InducedSortingSAConstructer {
 	 * @param slindicator
 	 * @param sa
 	 * @param library
-	 * @return
+	 * @return updated suffixarray with S-types' score.
 	 */
 	private static int[] sortSSufixes(byte[] slindicator, int[] sa, String library){
 		// TODO sortSSuffixesの実装
