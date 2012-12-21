@@ -3,6 +3,9 @@
  */
 package SuffixArray;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author takashi
  *	
@@ -11,7 +14,9 @@ package SuffixArray;
  *
  */
 public class InducedSortingSAConstructer {
-
+	private static final boolean DEBUG = true;
+	private int[] a;// staticわからん
+	
 	/**
 	 * Constructerは用いられません。
 	 */
@@ -26,6 +31,14 @@ public class InducedSortingSAConstructer {
 	 * @return
 	 */
 	public static AbstractSuffixArray constructSA(String library) {
+//		やはり最初にひな形をつくってしまう方がいろいろとやりやすい。
+		/* 初期化*/
+		int anum = 0;
+		int tnum = 0;
+		int cnum = 0;
+		int gnum = 0;
+		int l = library.length();
+		
 		
 //		step 0: Check S or L type.
 		/* Sは1, Lは0.*/
@@ -45,19 +58,23 @@ public class InducedSortingSAConstructer {
 	}
 	
 	
+	
+	
 	/**
 	 * Check "S or L type" in the induced sorting algorithm.
 	 * @param library
-	 * @return
+	 * @return 1:S 0:L
 	 */
 	private static byte[] checkSL(String library){
 		
-		byte[] indicator = new byte[library.length()];
+		byte[] indicator = new byte[library.length() + 1];
 		
 //		右となりと確認してその大小でSLtypeをつける
-		
-//		イテレータを使いたい
-		for(int i = 0; i < library.length(); i++){
+//		一緒にLMSも登録してしまったほうが速いかもしれない。そうしていない。
+		indicator[library.length()] = 1;// 末尾は特別扱いするのがだんだんめんどくさくなってくる。
+		// はじめに末尾になにか追加しておくべきかもしれない。(文字コードで一番小さい数を代入しておくなど)
+		indicator[library.length() - 1] = 1;
+		for(int i = library.length() - 2; i >= 0; i--){
 			if (library.codePointAt(i) < library.codePointAt(i+1)){
 				indicator[i] = 1;
 			}
@@ -79,16 +96,79 @@ public class InducedSortingSAConstructer {
 	 */
 	private static int[] sortLMSSuffixes(byte[] slindicator, String library){
 		
-		// TODO sortLMEの実装
+		// TODO sortLMSの実装
 		
-		int[] sa = new int[library.length()];
+		/* saの初期化 */
+		int[] sa = new int[library.length() + 1];
+		for(int i = 0; i < sa.length; i++){
+			sa[i] = -1;
+		}
+		
+//		まずLMSを発見する。
+//		末尾は別扱いで登録する。
+		List<Integer> lmslist = new ArrayList<Integer>(library.length() / 10);// 最大でもこのサイズで済む<- この仕様はやめたほうがいい
+		int j = 0;
+		for(int i = 0; i < library.length(); i++){
+			if (slindicator[i] == 0){
+				if (slindicator[i+1] == 1){
+					lmslist.add(i+1);
+					i++;
+					j++;
+				}
+			}
+		}
 		
 		
+//		次にそれをソートする。
+//		ソートはサブルーチン化したほうがスリムなのでそうする。
+		int[] sortedlmslist = lazysortSuffixes(lmslist, library);
+		
+//		ソートしたものをSAに登録する。
+//		最初のものはnullであるはずなので自明で問わずに登録する。
+		sa[0] = sortedlmslist[0];// ここはlibrary.length + 1になっているはず
+		// 確認ルーチン
+		if (DEBUG){
+			System.out.print(sa[0]); System.out.println(sortedlmslist[0]); System.out.print(library.length()+1);
+			if (sa[0] != sortedlmslist[0]){
+				new Exception().printStackTrace();
+			}
+		}
+		
+		int tmp = 0;
+		for(int i = 0; i < sortedlmslist.length; i++){
+			/* DNA塩基列のみへの対応、他への対応を考えるならこの部分はエラーとなる */
+			tmp = library.codePointAt(sortedlmslist[i]);
+			
+			switch(tmp){
+			case 'A':
+				break;
+			case 'T':
+				break;
+			case 'C':
+				break;
+			case 'G':
+				break;
+			}
+		}
 		
 		return sa;
-		
 	}
 	
+	
+	
+	/**
+	 * 与えられたsuffixの開始位置配列をもとにそれを整列して返す。
+	 * 低速なアルゴリズムを仕様する。
+	 * @param list
+	 * @param library
+	 * @return
+	 */
+	private static int[] lazysortSuffixes(List<Integer> list, String library){
+		
+		
+		
+		return null;
+	}
 	
 	/**
 	 * Sort L-type suffixes and update the suffix array.
@@ -102,7 +182,9 @@ public class InducedSortingSAConstructer {
 		int[] updsa = sa;
 		
 		
+		
 		return updsa;
+		
 	}
 	
 	
