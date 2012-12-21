@@ -152,6 +152,7 @@ public class InducedSortingSAConstructer {
 		}
 		
 		return sa;
+		
 	}
 	
 	
@@ -165,10 +166,30 @@ public class InducedSortingSAConstructer {
 	 */
 	private static int[] lazysortSuffixes(List<Integer> list, String library){
 		
+//		libraryの中から指定場所の接尾辞を拾ってくる
 		
+		String tmpstr = new String();
+		String pop = library.substring(list.get());
+		for(int i = 0; i < list.size(); i++){
+			
+			tmpstr = pickUpSuffix(i, library);
+		}
 		
 		return null;
 	}
+	
+	
+	/**
+	 * 
+	 * @param a
+	 * @param library
+	 * @return
+	 */
+	private static String pickUpSuffix(int a, String library){
+		return library.substring(a);
+	}
+	
+	
 	
 	/**
 	 * Sort L-type suffixes and update the suffix array.
