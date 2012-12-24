@@ -4,6 +4,7 @@
 package SuffixArray;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -23,7 +24,7 @@ public class InducedSortingSAConstructer {
 	public InducedSortingSAConstructer() {
 		// TODO 自動生成されたコンストラクター・スタブ
 	}
-
+	
 	
 	/**
 	 * indeced sortingによってSAを構築します。
@@ -33,6 +34,7 @@ public class InducedSortingSAConstructer {
 	public static AbstractSuffixArray constructSA(String library) {
 //		やはり最初にひな形をつくってしまう方がいろいろとやりやすい。
 		/* 初期化*/
+//		aの数
 		int anum = 0;
 		int tnum = 0;
 		int cnum = 0;
@@ -121,7 +123,13 @@ public class InducedSortingSAConstructer {
 		
 //		次にそれをソートする。
 //		ソートはサブルーチン化したほうがスリムなのでそうする。
-		int[] sortedlmslist = lazysortSuffixes(lmslist, library);
+		List<Integer> tmplmslist = quicksortSuffixes(lmslist, library);
+		int llmslist = tmplmslist.size();
+		int[] sortedlmslist = new int[llmslist];
+		/* List<Integer>からint[]への書き換え */
+		for(int i = 0; i < llmslist; i++){
+			sortedlmslist[i] = tmplmslist.get(i);
+		}
 		
 //		ソートしたものをSAに登録する。
 //		最初のものはnullであるはずなので自明で問わずに登録する。
@@ -135,12 +143,14 @@ public class InducedSortingSAConstructer {
 		}
 		
 		int tmp = 0;
+		
 		for(int i = 0; i < sortedlmslist.length; i++){
 			/* DNA塩基列のみへの対応、他への対応を考えるならこの部分はエラーとなる */
 			tmp = library.codePointAt(sortedlmslist[i]);
 			
 			switch(tmp){
 			case 'A':
+				
 				break;
 			case 'T':
 				break;
@@ -160,33 +170,58 @@ public class InducedSortingSAConstructer {
 	/**
 	 * 与えられたsuffixの開始位置配列をもとにそれを整列して返す。
 	 * 低速なアルゴリズムを仕様する。
+	 * 実装完了したと思います。
 	 * @param list
 	 * @param library
-	 * @return
+	 * @return quicksortしたsuffixarray
 	 */
-	private static int[] lazysortSuffixes(List<Integer> list, String library){
+	private static List<Integer> quicksortSuffixes(List<Integer> list, String library){
+//		かならず1度は各suffixを呼び出すのだから、すべて先に呼び出してストックしてもよい
+//		計算速度をとるか、メモリをとるか
+//		とりあえずメモリをとった。毎回計算。
+//		TODO 上のコメントをチェック。
 		
-//		libraryの中から指定場所の接尾辞を拾ってくる
 		
-		String tmpstr = new String();
-		String pop = library.substring(list.get());
+		
+//		任意のintとintからそれがどちらが早いsuffixを表すのかを返す関数
+//		quicksortの実装
+//		かなしいquicksortの話
+		
+//		pivotの選択
+//		listの中からランダムに好きな場所を選ぶ
+		int pivot = ((int) (Math.random() * 10)) % library.length();
+		
+		
+//		領域の分割
+		List<Integer> nextb = new ArrayList<Integer>();// 前半
+		List<Integer> nexta = new ArrayList<Integer>();// 後半
+//		分割されたものをもとに再帰
+//		末尾再帰がないのでstackを大量に消費してしまいます。
 		for(int i = 0; i < list.size(); i++){
-			
-			tmpstr = pickUpSuffix(i, library);
+			if (compareSuffixes(i, pivot, library) <= 0){
+				nextb.add(i);
+			}
+			else{
+				nexta.add(i);
+			}
 		}
+		List<Integer> harvest = new ArrayList<Integer>();
+		harvest.addAll(quicksortSuffixes(nextb, library));
+		harvest.addAll(quicksortSuffixes(nexta, library));
 		
-		return null;
+		return harvest;
 	}
 	
 	
 	/**
-	 * 
+	 * 任意のintとintからそれがどちらが早いsuffixを表すのかを返す関数
 	 * @param a
+	 * @param b
 	 * @param library
-	 * @return
+	 * @return aがbより辞書順序が早ければ負の値
 	 */
-	private static String pickUpSuffix(int a, String library){
-		return library.substring(a);
+	private static int compareSuffixes(int a, int b, String library){
+		return library.substring(a).compareTo(library.substring(b));
 	}
 	
 	
