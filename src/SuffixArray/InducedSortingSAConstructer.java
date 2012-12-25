@@ -12,35 +12,36 @@ import java.util.List;
  *	
  *	inducedSotringを用いてSAを構築します。
  *	ネストしたメソッドを用いてください。(static only use)
- *
+ *	つづり間違えた(constructor)
  */
 public class InducedSortingSAConstructer {
 	private static final boolean DEBUG = true;
-	private int[] a;// staticわからん
+//	staticだとこういうグローバル変数を持つことはできないのかもしれない
+	private static List<Integer> Alist;
+	private static List<Integer> Clist;
+	private static List<Integer> Glist;
+	private static List<Integer> Tlist;
 	
 	/**
-	 * Constructerは用いられません。
+	 * Constructorは用いられません。
 	 */
 	public InducedSortingSAConstructer() {
-		// TODO 自動生成されたコンストラクター・スタブ
+		
 	}
 	
 	
 	/**
-	 * indeced sortingによってSAを構築します。
+	 * induced sortingによってSAを構築します。
 	 * @param library
 	 * @return
 	 */
 	public static AbstractSuffixArray constructSA(String library) {
-//		やはり最初にひな形をつくってしまう方がいろいろとやりやすい。
-		/* 初期化*/
-//		aの数
-		int anum = 0;
-		int tnum = 0;
-		int cnum = 0;
-		int gnum = 0;
-		int l = library.length();
+		Alist = new ArrayList<Integer>(library.length() / 10);
+		Clist = new ArrayList<Integer>(library.length() / 10);
+		Glist = new ArrayList<Integer>(library.length() / 10);
+		Tlist = new ArrayList<Integer>(library.length() / 10);
 		
+		Alist.add(0);// エラーではないおうだ
 		
 //		step 0: Check S or L type.
 		/* Sは1, Lは0.*/
@@ -60,10 +61,9 @@ public class InducedSortingSAConstructer {
 	}
 	
 	
-	
-	
 	/**
 	 * Check "S or L type" in the induced sorting algorithm.
+	 * enum型で登録した方が絶対に良い
 	 * @param library
 	 * @return 1:S 0:L
 	 */
@@ -108,7 +108,7 @@ public class InducedSortingSAConstructer {
 		
 //		まずLMSを発見する。
 //		末尾は別扱いで登録する。
-		List<Integer> lmslist = new ArrayList<Integer>(library.length() / 10);// 最大でもこのサイズで済む<- この仕様はやめたほうがいい
+		List<Integer> lmslist = new ArrayList<Integer>(library.length() / 10);
 		int j = 0;
 		for(int i = 0; i < library.length(); i++){
 			if (slindicator[i] == 0){
@@ -120,9 +120,7 @@ public class InducedSortingSAConstructer {
 			}
 		}
 		
-		
-//		次にそれをソートする。
-//		ソートはサブルーチン化したほうがスリムなのでそうする。
+//		LMSをソートする。
 		List<Integer> tmplmslist = quicksortSuffixes(lmslist, library);
 		int llmslist = tmplmslist.size();
 		int[] sortedlmslist = new int[llmslist];
@@ -133,6 +131,7 @@ public class InducedSortingSAConstructer {
 		
 //		ソートしたものをSAに登録する。
 //		最初のものはnullであるはずなので自明で問わずに登録する。
+//		末尾リスト(null単独)、先頭がAのリスト、Cのリスト、Gのリスト、Tのリストを別に作って最後に統合すればよい、塩基数は必要なくなる
 		sa[0] = sortedlmslist[0];// ここはlibrary.length + 1になっているはず
 		// 確認ルーチン
 		if (DEBUG){
