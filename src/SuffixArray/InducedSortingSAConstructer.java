@@ -181,22 +181,15 @@ public class InducedSortingSAConstructer {
 //		とりあえずメモリをとった。毎回計算。
 //		TODO 上のコメントをチェック。
 		
-		
-		
-//		任意のintとintからそれがどちらが早いsuffixを表すのかを返す関数
-//		quicksortの実装
-//		かなしいquicksortの話
-		
+				
 //		pivotの選択
 //		listの中からランダムに好きな場所を選ぶ
 		int pivot = ((int) (Math.random() * 10)) % library.length();
-		
-		
+				
 //		領域の分割
 		List<Integer> nextb = new ArrayList<Integer>();// 前半
 		List<Integer> nexta = new ArrayList<Integer>();// 後半
 //		分割されたものをもとに再帰
-//		末尾再帰がないのでstackを大量に消費してしまいます。
 		for(int i = 0; i < list.size(); i++){
 			if (compareSuffixes(i, pivot, library) <= 0){
 				nextb.add(i);
