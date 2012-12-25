@@ -12,6 +12,9 @@ import java.util.List;
  *	
  *	inducedSotringを用いてSAを構築します。
  *	ネストしたメソッドを用いてください。(static only use)
+ *	DNA塩基列にのみ対応。NなどのATCG以外の塩基は
+ *	このクラスを使用するまえに編集して除去しておくこと。
+ *	
  *	つづり間違えた(constructor)
  */
 public class InducedSortingSAConstructer {
@@ -41,7 +44,7 @@ public class InducedSortingSAConstructer {
 		Glist = new ArrayList<Integer>(library.length() / 10);
 		Tlist = new ArrayList<Integer>(library.length() / 10);
 		
-		Alist.add(0);// エラーではないおうだ
+		Alist.add(0);// エラーではないようだ
 		
 //		step 0: Check S or L type.
 		/* Sは1, Lは0.*/
@@ -146,22 +149,23 @@ public class InducedSortingSAConstructer {
 		for(int i = 0; i < sortedlmslist.length; i++){
 			/* DNA塩基列のみへの対応、他への対応を考えるならこの部分はエラーとなる */
 			tmp = library.codePointAt(sortedlmslist[i]);
-			
 			switch(tmp){
 			case 'A':
-				
+				Alist.add(tmp);
 				break;
 			case 'T':
+				Tlist.add(tmp);
 				break;
 			case 'C':
+				Clist.add(tmp);
 				break;
 			case 'G':
+				Glist.add(tmp);
 				break;
 			}
 		}
 		
 		return sa;
-		
 	}
 	
 	
