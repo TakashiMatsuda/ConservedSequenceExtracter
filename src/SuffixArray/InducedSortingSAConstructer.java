@@ -74,6 +74,7 @@ public class InducedSortingSAConstructer {
 		
 		byte[] indicator = new byte[library.length() + 1];
 		
+		
 //		右となりと確認してその大小でSLtypeをつける
 //		一緒にLMSも登録してしまったほうが速いかもしれない。そうしていない。
 		indicator[library.length()] = 1;// 末尾は特別扱いするのがだんだんめんどくさくなってくる。
@@ -112,13 +113,11 @@ public class InducedSortingSAConstructer {
 //		まずLMSを発見する。
 //		末尾は別扱いで登録する。
 		List<Integer> lmslist = new ArrayList<Integer>(library.length() / 10);
-		int j = 0;
 		for(int i = 0; i < library.length(); i++){
 			if (slindicator[i] == 0){
 				if (slindicator[i+1] == 1){
 					lmslist.add(i+1);
 					i++;
-					j++;
 				}
 			}
 		}

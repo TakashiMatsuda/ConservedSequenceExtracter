@@ -79,6 +79,7 @@ public class RedBlackMultiTree<K,V> extends TreeMap<K, V>{
 	 */
 	public RedBlackMultiTree(){
 		comparator = null;
+		
 	}
 	
 	public RedBlackMultiTree(Comparator<? super K> comparator){
